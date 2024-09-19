@@ -8,7 +8,7 @@ from keras.models import load_model
 from modules.database import insert_data, load_data, save_predictions, get_last_id
 
 # LSTM Model
-model = load_model('C:/Users/Mert Can/PycharmProjects/pythonProject/pump-status-prediction-plus/data/lstm_model.keras')
+model = load_model('C:/Users/Mert Can/PycharmProjects/pythonProject/pump-status-prediction-simulation/data/lstm_model.keras')
 
 st.title('Gerçek Zamanlı Veri Görselleştirme ve Kaydetme')
 
@@ -61,7 +61,7 @@ def generate_synthetic_data(id_value, stats):
     }
     return synthetic_data
 
-csv_file_path = 'C:/Users/Mert Can/PycharmProjects/pythonProject/pump-status-prediction-plus/data/updated_usablesensors.csv'
+csv_file_path = 'C:/Users/Mert Can/PycharmProjects/pythonProject/pump-status-prediction-simulation/data/updated_usablesensors.csv'
 data = pd.read_csv(csv_file_path)
 
 if not data.empty:
