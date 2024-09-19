@@ -6,9 +6,16 @@ from datetime import datetime
 import time
 from keras.models import load_model
 from modules.database import insert_data, load_data, save_predictions, get_last_id
+import os
 
-# LSTM Model
-model = load_model('C:/Users/Mert Can/PycharmProjects/pythonProject/pump-status-prediction-simulation/data/lstm_model.keras')
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(BASE_DIR, 'data', 'lstm_model.keras')
+csv_file_path = os.path.join(BASE_DIR, 'data', 'updated_usablesensors.csv')
+
+# LSTM Model and data
+model = load_model(model_path)
+data = pd.read_csv(csv_file_path)
+
 
 st.title('Gerçek Zamanlı Veri Görselleştirme ve Kaydetme')
 
@@ -60,9 +67,6 @@ def generate_synthetic_data(id_value, stats):
         "Pump Discharge Pressure 2": str(np.round(np.random.normal(stats['Pump Discharge Pressure 2']['mean'], stats['Pump Discharge Pressure 2']['std']), 2))
     }
     return synthetic_data
-
-csv_file_path = 'C:/Users/Mert Can/PycharmProjects/pythonProject/pump-status-prediction-simulation/data/updated_usablesensors.csv'
-data = pd.read_csv(csv_file_path)
 
 if not data.empty:
     stats = calculate_stats(data)
